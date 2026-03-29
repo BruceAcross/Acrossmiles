@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Across Miles — From Miles Away, With Love</title>
+  <meta name="description" content="Across Miles helps people living abroad send love, care, and meaningful surprises to their families back home in Vasai West, India."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --sage: #a8bfa4;
+      --sage-btn: #7fa67f;
+      --sage-light: #cfe0cc;
+      --sage-pale: #e8f1e7;
+      --cream: #f6f4ef;
+      --white: #fdfcfa;
+      --charcoal: #2c2c2c;
+      --muted: #637560;
+      --muted-light: #8a9e87;
+      --border: #d4e0d2;
+      --radius: 18px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 24px rgba(100,130,95,0.10);
+      --shadow-md: 0 8px 40px rgba(100,130,95,0.14);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); line-height: 1.7; overflow-x: hidden; }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+    a { text-decoration: none; color: inherit; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--sage-light); border-radius: 3px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:200;
+      background: rgba(246,244,239,0.93);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      height: 68px; padding: 0 6%;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--charcoal); cursor: pointer; }
+    .nav-logo span { color: var(--muted); font-weight: 400; font-style: italic; }
+    .nav-links { display:flex; align-items:center; gap:2rem; list-style:none; }
+    .nav-links a { font-size: 0.87rem; font-weight: 500; color: var(--charcoal); opacity: 0.65; transition: opacity 0.2s; cursor: pointer; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+    .nav-wa { background: var(--sage-btn); color: #fff !important; opacity: 1 !important; padding: 0.5rem 1.25rem; border-radius: 50px; font-size: 0.84rem !important; transition: background 0.2s !important; }
+    .nav-wa:hover { background: var(--muted) !important; }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+    .hamburger span { display:block; width:22px; height:2px; background:var(--charcoal); border-radius:2px; }
+    .mobile-menu { display:none; position:fixed; top:68px; left:0; right:0; z-index:199; background:var(--cream); border-bottom:1px solid var(--border); padding:1.5rem 6%; flex-direction:column; gap:1.2rem; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-size:1rem; font-weight:500; color:var(--charcoal); opacity:0.75; cursor:pointer; }
+
+    /* PAGES */
+    .page { display:none; padding-top:68px; min-height:100vh; }
+    .page.active { display:block; }
+
+    /* BUTTONS */
+    .btn-primary { display:inline-flex; align-items:center; gap:0.5rem; background:var(--sage-btn); color:#fff; padding:0.75rem 1.8rem; border-radius:50px; font-size:0.9rem; font-weight:500; font-family:'DM Sans',sans-serif; border:none; cursor:pointer; transition:background 0.2s,transform 0.15s; }
+    .btn-primary:hover { background:var(--muted); transform:translateY(-1px); }
+    .btn-outline { display:inline-flex; align-items:center; gap:0.5rem; background:transparent; color:var(--charcoal); padding:0.75rem 1.8rem; border-radius:50px; font-size:0.9rem; font-weight:500; font-family:'DM Sans',sans-serif; border:1.5px solid var(--border); cursor:pointer; transition:border-color 0.2s,background 0.2s,transform 0.15s; }
+    .btn-outline:hover { border-color:var(--sage-btn); background:var(--sage-pale); transform:translateY(-1px); }
+    .btn-group { display:flex; gap:1rem; flex-wrap:wrap; }
+
+    /* LABELS */
+    .section-label { font-size:0.7rem; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted-light); margin-bottom:1rem; display:block; }
+    .section-heading { font-size:clamp(1.9rem,3vw,2.7rem); font-weight:700; color:var(--charcoal); margin-bottom:1.2rem; }
+    .section-sub { font-size:1rem; color:var(--muted); max-width:520px; font-weight:300; margin-bottom:3.5rem; }
+
+    /* HERO */
+    .hero { min-height:calc(100vh - 68px); display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:4rem; padding:6% 6% 5%; }
+    .hero h1 { font-size:clamp(2.4rem,4vw,3.8rem); font-weight:700; margin-bottom:1.4rem; }
+    .hero h1 em { font-style:italic; color:var(--muted); }
+    .hero p { font-size:1.05rem; color:var(--muted); max-width:440px; font-weight:300; margin-bottom:2.4rem; }
+    .hero-img-wrap { position:relative; border-radius:var(--radius); overflow:hidden; background:var(--sage-pale); aspect-ratio:4/5; box-shadow:var(--shadow-md); }
+    .hero-img-placeholder { width:100%; height:100%; background:linear-gradient(145deg,var(--sage-pale) 0%,var(--sage-light) 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; color:var(--muted); font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; }
+    .hero-badge { position:absolute; bottom:1.5rem; left:1.5rem; background:rgba(253,252,250,0.92); backdrop-filter:blur(8px); padding:0.8rem 1.2rem; border-radius:var(--radius-sm); box-shadow:var(--shadow); }
+    .hero-badge strong { display:block; font-size:1.1rem; color:var(--charcoal); }
+    .hero-badge span { font-size:0.78rem; color:var(--muted); }
+
+    /* SERVICES */
+    .services-section { padding:6rem 6%; background:var(--white); }
+    .services-header { text-align:center; }
+    .services-header .section-sub { margin:0 auto 3.5rem; }
+    .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .service-card { background:var(--cream); border-radius:var(--radius); padding:2rem; border:1px solid var(--border); transition:box-shadow 0.25s,transform 0.25s; }
+    .service-card:hover { box-shadow:var(--shadow-md); transform:translateY(-4px); }
+    .service-icon { width:48px; height:48px; background:var(--sage-pale); border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:1.2rem; font-size:1.4rem; }
+    .service-card h4 { font-size:1.05rem; font-weight:600; margin-bottom:0.6rem; }
+    .service-card p { font-size:0.88rem; color:var(--muted); font-weight:300; margin-bottom:1.3rem; line-height:1.6; }
+    .service-link { font-size:0.83rem; font-weight:500; color:var(--muted); display:inline-flex; align-items:center; gap:0.35rem; transition:color 0.2s; }
+    .service-link:hover { color:var(--charcoal); }
+    .service-link::after { content:'→'; transition:transform 0.2s; }
+    .service-link:hover::after { transform:translateX(3px); }
+
+    /* HOW IT WORKS */
+    .how-section { padding:6rem 6%; background:var(--sage-pale); }
+    .how-header { text-align:center; }
+    .how-header .section-sub { margin:0 auto 3.5rem; }
+    .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; position:relative; }
+    .steps-grid::before { content:''; position:absolute; top:2rem; left:16.6%; right:16.6%; height:1px; background:var(--border); }
+    .step { text-align:center; position:relative; z-index:1; }
+    .step-num { width:56px; height:56px; background:var(--white); border:1.5px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.4rem; font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:600; color:var(--muted); }
+    .step h4 { font-size:1rem; font-weight:600; margin-bottom:0.5rem; }
+    .step p { font-size:0.88rem; color:var(--muted); font-weight:300; }
+
+    /* WHY US */
+    .why-section { padding:6rem 6%; background:var(--white); }
+    .why-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:3.5rem; }
+    .why-card { background:var(--sage-pale); border-radius:var(--radius); padding:2rem 2.2rem; border:1px solid var(--border); }
+    .why-num { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; color:var(--sage-light); margin-bottom:0.8rem; line-height:1; }
+    .why-card h4 { font-size:1rem; font-weight:600; margin-bottom:0.5rem; }
+    .why-card p { font-size:0.88rem; color:var(--muted); font-weight:300; }
+
+    /* HOME CTA */
+    .home-cta { padding:6rem 6%; background:var(--charcoal); text-align:center; }
+    .home-cta h2 { font-size:clamp(1.8rem,3vw,2.8rem); color:var(--cream); margin-bottom:1rem; }
+    .home-cta p { color:var(--muted-light); font-weight:300; margin-bottom:2.4rem; }
+    .home-cta .btn-outline { border-color:rgba(255,255,255,0.25); color:#fff; }
+    .home-cta .btn-outline:hover { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.5); }
+
+    /* SHOP */
+    .shop-hero { background:var(--sage-pale); padding:4rem 6% 3rem; text-align:center; }
+    .shop-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; padding:3rem 6% 5rem; background:var(--white); }
+    .product-card { background:var(--cream); border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); transition:box-shadow 0.25s,transform 0.25s; }
+    .product-card:hover { box-shadow:var(--shadow-md); transform:translateY(-4px); }
+    .product-img { height:220px; background:linear-gradient(145deg,var(--sage-pale),var(--sage-light)); display:flex; align-items:center; justify-content:center; font-size:3.5rem; }
+    .product-body { padding:1.5rem; }
+    .product-body h3 { font-size:1.1rem; font-weight:600; margin-bottom:0.4rem; }
+    .product-body .price { font-size:1rem; color:var(--muted); font-weight:400; margin-bottom:0.6rem; }
+    .product-body .price strong { color:var(--charcoal); font-family:'Playfair Display',serif; font-size:1.1rem; }
+    .product-desc { font-size:0.87rem; color:var(--muted); font-weight:300; margin-bottom:1.3rem; }
+    .product-actions { display:flex; gap:0.75rem; flex-wrap:wrap; }
+    .btn-wa { display:inline-flex; align-items:center; gap:0.4rem; background:#25D366; color:#fff; padding:0.6rem 1.2rem; border-radius:50px; font-size:0.83rem; font-weight:500; font-family:'DM Sans',sans-serif; border:none; cursor:pointer; transition:background 0.2s; }
+    .btn-wa:hover { background:#1fba5a; }
+    .btn-sm { display:inline-flex; align-items:center; background:transparent; color:var(--muted); padding:0.6rem 1.2rem; border-radius:50px; font-size:0.83rem; font-weight:500; font-family:'DM Sans',sans-serif; border:1.5px solid var(--border); cursor:pointer; transition:border-color 0.2s,color 0.2s; }
+    .btn-sm:hover { border-color:var(--sage-btn); color:var(--charcoal); }
+
+    /* ABOUT */
+    .about-hero { background:var(--sage-pale); padding:5rem 6% 4rem; }
+    .about-story { padding:5rem 6%; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; background:var(--white); }
+    .about-story-img { border-radius:var(--radius); background:linear-gradient(145deg,var(--sage-pale),var(--sage-light)); aspect-ratio:4/5; display:flex; align-items:center; justify-content:center; font-size:5rem; }
+    .about-story p { font-size:1rem; color:var(--muted); font-weight:300; margin-bottom:1.2rem; line-height:1.8; }
+    .about-features { padding:5rem 6%; background:var(--cream); }
+    .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+    .feature-card { background:var(--white); border-radius:var(--radius); padding:2rem; border:1px solid var(--border); text-align:center; }
+    .feature-icon { font-size:2rem; margin-bottom:1rem; }
+    .feature-card h4 { font-size:1rem; font-weight:600; margin-bottom:0.5rem; }
+    .feature-card p { font-size:0.87rem; color:var(--muted); font-weight:300; }
+
+    /* FAQ */
+    .faq-hero { background:var(--sage-pale); padding:5rem 6% 3.5rem; text-align:center; }
+    .faq-list { padding:4rem 6% 5rem; max-width:780px; margin:0 auto; }
+    .faq-item { border-bottom:1px solid var(--border); padding:1.4rem 0; }
+    .faq-q { display:flex; justify-content:space-between; align-items:center; cursor:pointer; gap:1rem; }
+    .faq-q h4 { font-size:0.98rem; font-weight:600; font-family:'DM Sans',sans-serif; color:var(--charcoal); }
+    .faq-icon { width:28px; height:28px; background:var(--sage-pale); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.1rem; color:var(--muted); transition:transform 0.25s,background 0.2s; }
+    .faq-item.open .faq-icon { transform:rotate(45deg); background:var(--sage-light); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height 0.35s ease,padding 0.25s; }
+    .faq-item.open .faq-a { max-height:300px; padding-top:0.9rem; }
+    .faq-a p { font-size:0.9rem; color:var(--muted); font-weight:300; line-height:1.75; }
+    .faq-cta { padding:4rem 6%; background:var(--sage-pale); text-align:center; }
+    .faq-cta h3 { font-size:1.6rem; margin-bottom:0.7rem; }
+    .faq-cta p { font-size:0.95rem; color:var(--muted); margin-bottom:2rem; }
+
+    /* CONTACT */
+    .contact-hero { background:var(--sage-pale); padding:5rem 6% 3.5rem; }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; padding:4rem 6% 5rem; background:var(--white); }
+    .contact-form { display:flex; flex-direction:column; gap:1rem; }
+    .form-group { display:flex; flex-direction:column; gap:0.4rem; }
+    .form-group label { font-size:0.8rem; font-weight:500; color:var(--muted); letter-spacing:0.05em; text-transform:uppercase; }
+    .form-group input, .form-group textarea { font-family:'DM Sans',sans-serif; font-size:0.95rem; background:var(--cream); border:1.5px solid var(--border); border-radius:var(--radius-sm); padding:0.8rem 1rem; color:var(--charcoal); outline:none; transition:border-color 0.2s; }
+    .form-group input:focus, .form-group textarea:focus { border-color:var(--sage-btn); }
+    .form-group textarea { resize:vertical; min-height:130px; }
+    .contact-info { display:flex; flex-direction:column; gap:1.8rem; }
+    .contact-item { display:flex; align-items:flex-start; gap:1rem; }
+    .contact-item-icon { width:42px; height:42px; background:var(--sage-pale); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.1rem; }
+    .contact-item strong { display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.15rem; }
+    .contact-item span { font-size:0.88rem; color:var(--muted); font-weight:300; }
+    .contact-item a { color:var(--muted); transition:color 0.2s; }
+    .contact-item a:hover { color:var(--charcoal); }
+    .map-wrap { border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); }
+
+    /* FOOTER */
+    footer { background:var(--sage-pale); border-top:1px solid var(--border); padding:4rem 6% 2rem; }
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1.5fr; gap:3rem; margin-bottom:3rem; }
+    .footer-brand p { font-size:0.88rem; color:var(--muted); font-weight:300; margin-top:0.7rem; max-width:240px; line-height:1.7; }
+    .footer-col h5 { font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:1.2rem; font-family:'DM Sans',sans-serif; }
+    .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:0.6rem; }
+    .footer-col ul a { font-size:0.88rem; color:var(--charcoal); opacity:0.65; transition:opacity 0.2s; cursor:pointer; }
+    .footer-col ul a:hover { opacity:1; }
+    .footer-newsletter { display:flex; gap:0.5rem; margin-top:0.5rem; }
+    .footer-newsletter input { font-family:'DM Sans',sans-serif; flex:1; padding:0.6rem 1rem; border:1.5px solid var(--border); border-radius:50px; background:var(--white); font-size:0.85rem; outline:none; transition:border-color 0.2s; }
+    .footer-newsletter input:focus { border-color:var(--sage-btn); }
+    .footer-newsletter button { background:var(--sage-btn); color:#fff; border:none; border-radius:50px; padding:0.6rem 1.1rem; font-size:0.82rem; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background 0.2s; }
+    .footer-newsletter button:hover { background:var(--muted); }
+    .footer-bottom { border-top:1px solid var(--border); padding-top:1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; }
+    .footer-bottom p { font-size:0.82rem; color:var(--muted); font-weight:300; }
+    .footer-bottom a { color:var(--muted); margin-left:1rem; font-size:0.82rem; opacity:0.7; cursor:pointer; }
+    .footer-bottom a:hover { opacity:1; }
+
+    /* FLOATING WA */
+    .float-wa { position:fixed; bottom:2rem; right:2rem; z-index:999; width:54px; height:54px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 24px rgba(37,211,102,0.35); transition:transform 0.2s,box-shadow 0.2s; cursor:pointer; }
+    .float-wa:hover { transform:scale(1.08); box-shadow:0 8px 28px rgba(37,211,102,0.45); }
+    .float-wa svg { width:28px; height:28px; fill:#fff; }
+
+    /* ANIMATIONS */
+    .fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease,transform 0.6s ease; }
+    .fade-in.visible { opacity:1; transform:translateY(0); }
+
+    /* RESPONSIVE */
+    @media(max-width:900px) {
+      .nav-links { display:none; }
+      .hamburger { display:flex; }
+      .hero { grid-template-columns:1fr; padding:3rem 6%; min-height:auto; }
+      .hero-img-wrap { max-width:400px; margin:0 auto; aspect-ratio:4/3; }
+      .services-grid { grid-template-columns:repeat(2,1fr); }
+      .steps-grid { grid-template-columns:1fr; }
+      .steps-grid::before { display:none; }
+      .why-grid { grid-template-columns:1fr; }
+      .shop-grid { grid-template-columns:1fr; }
+      .about-story { grid-template-columns:1fr; }
+      .features-grid { grid-template-columns:1fr 1fr; }
+      .contact-grid { grid-template-columns:1fr; }
+      .footer-grid { grid-template-columns:1fr 1fr; gap:2rem; }
+    }
+    @media(max-width:560px) {
+      .services-grid, .features-grid, .footer-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Across <span>Miles</span></div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+    <li><a onclick="showPage('shop')" id="nav-shop">Shop</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a onclick="showPage('faq')" id="nav-faq">FAQ</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+    <li><a href="https://wa.me/919545240632" target="_blank" class="nav-wa">WhatsApp Us</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="showPage('home');closeMobile()">Home</a>
+  <a onclick="showPage('shop');closeMobile()">Shop</a>
+  <a onclick="showPage('about');closeMobile()">About</a>
+  <a onclick="showPage('faq');closeMobile()">FAQ</a>
+  <a onclick="showPage('contact');closeMobile()">Contact</a>
+  <a href="https://wa.me/919545240632" target="_blank">WhatsApp Us →</a>
+</div>
+
+<!-- ═══ HOME ═══ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="fade-in">
+      <span class="section-label">From Miles Away, With Love</span>
+      <h1>Bringing Families Closer, <em>Across Miles.</em></h1>
+      <p>We help people living abroad send love, care, and meaningful surprises to their families back home in Vasai West, India.</p>
+      <div class="btn-group">
+        <button class="btn-primary" onclick="showPage('shop')">Send a Surprise</button>
+        <a href="https://wa.me/919545240632" target="_blank" class="btn-outline">Talk to Us</a>
+      </div>
+    </div>
+    <div class="hero-img-wrap fade-in">
+      <div class="hero-img-placeholder">
+        <div style="font-size:5rem">🌸</div>
+        <span>Add your bouquet photo here</span>
+      </div>
+      <div class="hero-badge">
+        <strong>🌿 Vasai West</strong>
+        <span>Hyperlocal &amp; trusted</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="services-section">
+    <div class="services-header fade-in">
+      <span class="section-label">What We Offer</span>
+      <h2 class="section-heading">Heartfelt Services for Every Occasion</h2>
+      <p class="section-sub">Each service is designed with the same care and precision as if you were there yourself.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-in"><div class="service-icon">🌺</div><h4>Orchid Bouquets &amp; Florals</h4><p>Exotic orchid arrangements hand-delivered to brighten their day and remind them of your presence.</p><a href="https://wa.me/919545240632" target="_blank" class="service-link">Enquire Now</a></div>
+      <div class="service-card fade-in"><div class="service-icon">🎂</div><h4>Cakes &amp; Birthday Surprises</h4><p>Decadent cakes and festive decorations to ensure their special day is filled with sweetness and joy.</p><a href="https://wa.me/919545240632" target="_blank" class="service-link">Enquire Now</a></div>
+      <div class="service-card fade-in"><div class="service-icon">🍱</div><h4>Home-Cooked Meals</h4><p>Warm, authentic home-cooked meals that provide the comfort of family flavours, delivered fresh.</p><a href="https://wa.me/919545240632" target="_blank" class="service-link">Enquire Now</a></div>
+      <div class="service-card fade-in"><div class="service-icon">🎁</div><h4>Festival Hampers</h4><p>Curated collections of traditional sweets and gifts for Diwali, Raksha Bandhan, and every celebration.</p><a href="https://wa.me/919545240632" target="_blank" class="service-link">Enquire Now</a></div>
+      <div class="service-card fade-in"><div class="service-icon">💊</div><h4>Monthly Care Packages</h4><p>Regular health and wellness essentials paired with thoughtful treats — ensuring your parents feel cared for every month.</p><a href="https://wa.me/919545240632" target="_blank" class="service-link">Enquire Now</a></div>
+      <div class="service-card fade-in"><div class="service-icon">✨</div><h4>Custom Surprise Arrangements</h4><p>Something unique in mind? We'll bring your thoughtful idea to life with a personal touch.</p><a href="https://wa.me/919545240632" target="_blank" class="service-link">Enquire Now</a></div>
+    </div>
+  </section>
+
+  <section class="how-section">
+    <div class="how-header fade-in">
+      <span class="section-label">Simple Process</span>
+      <h2 class="section-heading">How It Works</h2>
+      <p class="section-sub">Three simple steps — and your love arrives at their doorstep.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step fade-in"><div class="step-num">01</div><h4>Tell Us What You Want</h4><p>Share your idea via WhatsApp or our contact form. We listen closely to understand your vision.</p></div>
+      <div class="step fade-in"><div class="step-num">02</div><h4>We Arrange &amp; Deliver</h4><p>Our local team sources fresh blooms and prepares every package with warmth and care.</p></div>
+      <div class="step fade-in"><div class="step-num">03</div><h4>You Receive Confirmation</h4><p>We share real-time delivery photos and videos so you witness the moment from across miles.</p></div>
+    </div>
+  </section>
+
+  <section class="why-section">
+    <div class="fade-in">
+      <span class="section-label">Why Choose Us</span>
+      <h2 class="section-heading">Trust &amp; Care, Delivered</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-in"><div class="why-num">01</div><h4>Trusted Local Service</h4><p>Based locally in Vasai West, we understand the nuances of delivery and personal care in your family's neighbourhood.</p></div>
+      <div class="why-card fade-in"><div class="why-num">02</div><h4>Real-Time Updates</h4><p>Peace of mind through instant photos and videos of the delivery moment, capturing every smile.</p></div>
+      <div class="why-card fade-in"><div class="why-num">03</div><h4>Personalized Arrangements</h4><p>Every arrangement is handcrafted and customized to reflect your specific message and sentimental touch.</p></div>
+      <div class="why-card fade-in"><div class="why-num">04</div><h4>Direct Communication</h4><p>No middlemen. Speak directly with our team via WhatsApp for instant responses and tailored solutions.</p></div>
+    </div>
+  </section>
+
+  <section class="home-cta">
+    <div class="fade-in">
+      <h2>Ready to Send Some Love?</h2>
+      <p>Because distance shouldn't stop care. Let us help you make their day special.</p>
+      <div class="btn-group" style="justify-content:center">
+        <button class="btn-primary" onclick="showPage('shop')">Browse Our Store</button>
+        <a href="https://wa.me/919545240632" target="_blank" class="btn-outline">Chat With Us</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ SHOP ═══ -->
+<div class="page" id="page-shop">
+  <div class="shop-hero fade-in">
+    <span class="section-label">Our Store</span>
+    <h1 class="section-heading">Send Something Beautiful</h1>
+    <p class="section-sub" style="margin:0 auto">Browse our curated offerings and let us deliver your love.</p>
+  </div>
+  <div class="shop-grid">
+    <div class="product-card fade-in">
+      <div class="product-img">🌺</div>
+      <div class="product-body">
+        <h3>Orchid Bouquet Collection</h3>
+        <p class="price">Starting at <strong>₹999</strong></p>
+        <p class="product-desc">Premium orchid arrangements from our own flower farm — fresh, exotic, and beautifully presented with a handwritten note.</p>
+        <div class="product-actions">
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20order%20an%20Orchid%20Bouquet." target="_blank" class="btn-wa">&#128172; Order via WhatsApp</a>
+          <a href="https://wa.me/919545240632" target="_blank" class="btn-sm">Enquire</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-img">🎂</div>
+      <div class="product-body">
+        <h3>Cake &amp; Birthday Surprise</h3>
+        <p class="price">Starting at <strong>₹699</strong></p>
+        <p class="product-desc">Custom cakes with balloon setups and decorations — perfect for celebrating from afar with photo confirmation.</p>
+        <div class="product-actions">
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20order%20a%20Cake%20Surprise." target="_blank" class="btn-wa">&#128172; Order via WhatsApp</a>
+          <a href="https://wa.me/919545240632" target="_blank" class="btn-sm">Enquire</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-img">🎁</div>
+      <div class="product-body">
+        <h3>Surprise Combo</h3>
+        <p class="price">Starting at <strong>₹1,499</strong></p>
+        <p class="product-desc">Orchid bouquet + cake + handwritten note — the complete surprise package, beautifully arranged and personally delivered.</p>
+        <div class="product-actions">
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20order%20a%20Surprise%20Combo." target="_blank" class="btn-wa">&#128172; Order via WhatsApp</a>
+          <a href="https://wa.me/919545240632" target="_blank" class="btn-sm">Enquire</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-img">💬</div>
+      <div class="product-body">
+        <h3>Custom Request</h3>
+        <p class="price" style="color:var(--muted-light)">Price on request</p>
+        <p class="product-desc">Have something unique in mind? Tell us your idea and we'll make it happen — with a personal touch you won't find anywhere else.</p>
+        <div class="product-actions">
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I%20have%20a%20custom%20request." target="_blank" class="btn-wa">&#128172; Talk to Us</a>
+          <a href="https://wa.me/919545240632" target="_blank" class="btn-sm">Enquire</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<div class="page" id="page-about">
+  <div class="about-hero fade-in">
+    <span class="section-label">Our Story</span>
+    <h1 class="section-heading">About Across Miles</h1>
+    <p style="font-size:1.05rem;color:var(--muted);font-weight:300;max-width:520px;margin-top:0.5rem">We started with a simple belief — that distance should never come in the way of showing love.</p>
+  </div>
+  <div class="about-story">
+    <div class="about-story-img fade-in">🌸</div>
+    <div class="fade-in">
+      <span class="section-label">Why We Started</span>
+      <h2 class="section-heading" style="font-size:1.9rem;margin-bottom:1.4rem">Built for Families That Are Miles Apart</h2>
+      <p>Every day, millions of people living abroad think about their parents, their siblings, their loved ones back home. They want to be there for birthdays, festivals, or even just an ordinary Tuesday lunch. But they can't always be.</p>
+      <p>That's where we come in. Across Miles is a hyperlocal gifting and family care service that helps you send thoughtful surprises — from beautiful orchid bouquets to home-cooked meals — directly to your family's doorstep in Vasai West.</p>
+      <p>We're not just a delivery service. We're your extended hand, your personal touch, your way of saying <em>"I'm thinking of you"</em> — from miles away.</p>
+      <a href="https://wa.me/919545240632" target="_blank" class="btn-primary" style="margin-top:1.2rem;display:inline-flex">Talk to Us</a>
+    </div>
+  </div>
+  <div class="about-features">
+    <div class="fade-in" style="text-align:center">
+      <span class="section-label">What Makes Us Different</span>
+      <h2 class="section-heading">Our Promise to You</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-in"><div class="feature-icon">💚</div><h4>Built on Love</h4><p>Every order is handled with genuine care. We treat your family like our own.</p></div>
+      <div class="feature-card fade-in"><div class="feature-icon">🏘️</div><h4>Community First</h4><p>Hyperlocal and trusted. We operate in your neighbourhood and know it well.</p></div>
+      <div class="feature-card fade-in"><div class="feature-icon">🌍</div><h4>Globally Connected</h4><p>Serving families across time zones — from the Gulf, UK, US, Canada and beyond.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FAQ ═══ -->
+<div class="page" id="page-faq">
+  <div class="faq-hero fade-in">
+    <span class="section-label">Support</span>
+    <h1 class="section-heading">Frequently Asked Questions</h1>
+    <p class="section-sub" style="margin:0 auto">Everything you need to know about sending love through Across Miles.</p>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>How do I place an order from abroad?</h4><div class="faq-icon">+</div></div><div class="faq-a"><p>Simply message us on WhatsApp or use the contact form. Share your requirements, preferred date, and delivery address. We'll confirm availability and guide you through the next steps — it's that simple.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>What payment methods do you accept?</h4><div class="faq-icon">+</div></div><div class="faq-a"><p>We accept UPI and bank transfers. For customers abroad, international payment methods including PayPal and Wise can be arranged on request.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>Do you offer same-day delivery?</h4><div class="faq-icon">+</div></div><div class="faq-a"><p>Same-day delivery may be available depending on the product and time of request. We recommend booking at least 24 hours in advance for guaranteed availability, especially for custom items.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>Can I customize my order?</h4><div class="faq-icon">+</div></div><div class="faq-a"><p>Absolutely. Whether it's a specific orchid arrangement, a custom cake design, or a personalized surprise setup with a handwritten note — we're happy to tailor everything to your needs.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>What areas do you currently serve?</h4><div class="faq-icon">+</div></div><div class="faq-a"><p>We currently serve Vasai West and surrounding localities. As we grow, we plan to expand our coverage. Message us to confirm if your area is covered.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>How will I know the delivery was completed?</h4><div class="faq-icon">+</div></div><div class="faq-a"><p>Once delivered, we send photo and video confirmation via WhatsApp so you can see the moment for yourself — no matter where in the world you are.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>Can you handle anniversaries and festivals?</h4><div class="faq-icon">+</div></div><div class="faq-a"><p>Yes — we specialize in birthdays, anniversaries, Diwali, Raksha Bandhan, Eid and all major occasions. The earlier you book, the better we can customize.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><h4>What if I need to change or cancel my order?</h4><div class="faq-icon">+</div></div><div class="faq-a"><p>Contact us as soon as possible. We'll do our best to accommodate changes. Modifications are subject to timing and product availability.</p></div></div>
+  </div>
+  <div class="faq-cta fade-in">
+    <h3>Still Have Questions?</h3>
+    <p>We're just a message away. Reach out anytime.</p>
+    <div class="btn-group" style="justify-content:center">
+      <a href="https://wa.me/919545240632" target="_blank" class="btn-primary">Chat on WhatsApp</a>
+      <button class="btn-outline" onclick="showPage('contact')">Contact Us</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
+<div class="page" id="page-contact">
+  <div class="contact-hero fade-in">
+    <span class="section-label">Get in Touch</span>
+    <h1 class="section-heading">Contact Us</h1>
+    <p style="font-size:1rem;color:var(--muted);font-weight:300;max-width:480px;margin-top:0.5rem">We're always happy to help. Reach out via WhatsApp for the quickest response.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="fade-in">
+      <h3 style="margin-bottom:1.5rem;font-size:1.4rem">Send Us a Message</h3>
+      <div class="contact-form">
+        <div class="form-group"><label>Your Name</label><input type="text" placeholder="Enter your name" id="cf-name"/></div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" id="cf-email"/></div>
+        <div class="form-group"><label>What would you like to send?</label><textarea placeholder="Tell us about your order or question..." id="cf-msg"></textarea></div>
+        <button class="btn-primary" onclick="handleFormSubmit()" style="width:fit-content">Send Message</button>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="contact-info">
+        <div><h3 style="font-size:1.4rem">We're Here for You</h3><p style="font-size:0.9rem;color:var(--muted);font-weight:300;margin-top:0.4rem">Available 9 AM – 10 PM IST, every day.</p></div>
+        <div class="contact-item"><div class="contact-item-icon">💬</div><div><strong>WhatsApp</strong><span><a href="https://wa.me/919545240632" target="_blank">+91 95452 40632</a></span></div></div>
+        <div class="contact-item"><div class="contact-item-icon">📞</div><div><strong>Phone</strong><span><a href="tel:+919545240632">+91 95452 40632</a></span></div></div>
+        <div class="contact-item"><div class="contact-item-icon">✉️</div><div><strong>Email</strong><span><a href="mailto:across.miles0@gmail.com">across.miles0@gmail.com</a></span></div></div>
+        <div class="contact-item"><div class="contact-item-icon">📍</div><div><strong>Service Area</strong><span>Vasai West, Maharashtra, India</span></div></div>
+        <div class="map-wrap">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60262.0!2d72.7988!3d19.3928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ae8b5e8e5a2f%3A0xe5e5e5e5e5e5e5e5!2sVasai+West%2C+Maharashtra!5e0!3m2!1sen!2sin!4v1" width="100%" height="220" style="border:0;border-radius:var(--radius)" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo" style="cursor:default">Across <span>Miles</span></div>
+      <p>From miles away, with love. Helping families stay connected despite the distance.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a onclick="showPage('home')">Home</a></li>
+        <li><a onclick="showPage('shop')">Shop</a></li>
+        <li><a onclick="showPage('about')">About Us</a></li>
+        <li><a onclick="showPage('contact')">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Support</h5>
+      <ul>
+        <li><a onclick="showPage('faq')">FAQ</a></li>
+        <li><a>Privacy Policy</a></li>
+        <li><a>Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Stay Connected</h5>
+      <p style="font-size:0.85rem;color:var(--muted);font-weight:300;margin-bottom:0.8rem">Get updates on new offerings.</p>
+      <div class="footer-newsletter">
+        <input type="email" placeholder="your@email.com"/>
+        <button>Join</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Across Miles. Bridging families with care.</p>
+    <div>
+      <a>Privacy Policy</a>
+      <a>Terms</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/919545240632" target="_blank" class="float-wa" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.535 5.858L.057 23.885a.5.5 0 0 0 .612.612l6.086-1.464A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.659-.52-5.167-1.426l-.371-.22-3.849.927.951-3.775-.242-.389A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a[id]').forEach(a => a.classList.remove('active'));
+    const pg = document.getElementById('page-' + id);
+    if (pg) {
+      pg.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const nav = document.getElementById('nav-' + id);
+      if (nav) nav.classList.add('active');
+      setTimeout(observeFadeIns, 80);
+    }
+  }
+  function toggleMobile() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+  function toggleFaq(el) { el.closest('.faq-item').classList.toggle('open'); }
+  function observeFadeIns() {
+    const els = document.querySelectorAll('.page.active .fade-in');
+    els.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 40) {
+        setTimeout(() => el.classList.add('visible'), i * 70);
+      }
+    });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 70); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    els.forEach(el => { if (!el.classList.contains('visible')) io.observe(el); });
+  }
+  function handleFormSubmit() {
+    const name = document.getElementById('cf-name').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const msg = document.getElementById('cf-msg').value.trim();
+    if (!name || !msg) { alert('Please fill in your name and message.'); return; }
+    const text = encodeURIComponent(`Hi Across Miles!\n\nName: ${name}\nEmail: ${email}\n\nMessage: ${msg}`);
+    window.open(`https://wa.me/919545240632?text=${text}`, '_blank');
+  }
+  window.addEventListener('load', observeFadeIns);
+  window.addEventListener('scroll', observeFadeIns, { passive: true });
+</script>
+</body>
+</html>
