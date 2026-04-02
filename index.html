@@ -126,10 +126,12 @@
 
     /* SHOP */
     .shop-hero { background:var(--sage-pale); padding:4rem 6% 3rem; text-align:center; }
-    .shop-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; padding:3rem 6% 5rem; background:var(--white); }
+    .shop-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; padding:3rem 6% 5rem; background:var(--white); }
     .product-card { background:var(--cream); border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); transition:box-shadow 0.25s,transform 0.25s; }
     .product-card:hover { box-shadow:var(--shadow-md); transform:translateY(-4px); }
-    .product-img { height:220px; background:linear-gradient(145deg,var(--sage-pale),var(--sage-light)); display:flex; align-items:center; justify-content:center; font-size:3.5rem; }
+    .product-img { background:linear-gradient(145deg,var(--sage-pale),var(--sage-light)); display:flex; align-items:center; justify-content:center; font-size:3.5rem; overflow:hidden; }
+    .product-img img { width:100%; height:auto; display:block; transition:transform 0.4s ease; }
+    .product-card:hover .product-img img { transform:scale(1.03); }
     .product-body { padding:1.5rem; }
     .product-body h3 { font-size:1.1rem; font-weight:600; margin-bottom:0.4rem; }
     .product-body .price { font-size:1rem; color:var(--muted); font-weight:400; margin-bottom:0.6rem; }
@@ -223,7 +225,7 @@
       .steps-grid { grid-template-columns:1fr; }
       .steps-grid::before { display:none; }
       .why-grid { grid-template-columns:1fr; }
-      .shop-grid { grid-template-columns:1fr; }
+.shop-grid { grid-template-columns:repeat(2,1fr); }
       .about-story { grid-template-columns:1fr; }
       .features-grid { grid-template-columns:1fr 1fr; }
       .contact-grid { grid-template-columns:1fr; }
@@ -274,8 +276,7 @@
     </div>
     <div class="hero-img-wrap fade-in">
       <div class="hero-img-placeholder">
-        <div style="font-size:5rem">🌸</div>
-        <span>Add your bouquet photo here</span>
+        <img src="images/bouquet1_1.png" alt="Purple Orchid Bouquet" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius);"/>
       </div>
       <div class="hero-badge">
         <strong>🌿 Vasai West</strong>
@@ -338,7 +339,7 @@
   </section>
 </div>
 
-<!-- ═══ SHOP ═══ -->
+<!-- SHOP -->
 <div class="page" id="page-shop">
   <div class="shop-hero fade-in">
     <span class="section-label">Our Store</span>
@@ -347,47 +348,116 @@
   </div>
   <div class="shop-grid">
     <div class="product-card fade-in">
-      <div class="product-img">🌺</div>
+      <div class="product-img"><img src="bouquet1_1.png" alt="Orchid Box Bouquet"/></div>
       <div class="product-body">
-        <h3>Orchid Bouquet Collection</h3>
-        <p class="price">Starting at <strong>₹999</strong></p>
-        <p class="product-desc">Premium orchid arrangements from our own flower farm — fresh, exotic, and beautifully presented with a handwritten note.</p>
+        <h3>The Ethereal Sovereign</h3>
+        <p class="price">Starting at <strong>&#8377;2499</strong></p>
+       <div class="product-desc">
+  <p>
+    A refined blend of white orchids and roses with soft blue hydrangeas, crafted to reflect elegance and calm luxury.
+  </p>
+  <p>
+    Perfect for meaningful moments — from birthdays to quiet gestures of love sent across miles.
+  </p>
+  <ul>
+    <li>Premium white orchids & roses</li>
+    <li>Blue hydrangea accents</li>
+    <li>Elegant wrapping</li>
+    <li>Personalized note</li>
+  </ul>
+</div>
         <div class="product-actions">
-          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20order%20an%20Orchid%20Bouquet." target="_blank" class="btn-wa">&#128172; Order via WhatsApp</a>
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20order%20an%20Orchid%20Box%20Bouquet." target="_blank" class="btn-wa">&#128172; Order via WhatsApp</a>
+          <a href="https://wa.me/919545240632" target="_blank" class="btn-sm">Enquire</a>
+        </div>
+      </div>
+    </div>
+<div class="product-card fade-in">
+      <div class="product-img"><img src="bouquet_4.png" alt="Purple Orchid Bloom Box"/></div>
+      <div class="product-body">
+        <h3>Purple Orchid Bloom Box</h3>
+        <p class="price">Starting at <strong>&#8377;1,499</strong></p>
+        <p class="product-desc">Vibrant purple and white orchids in a signature pink box — bold, beautiful, and completely unforgettable.</p>
+        <div class="product-actions">
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20order%20a%20Purple%20Orchid%20Bloom%20Box." target="_blank" class="btn-wa">&#128172; Order via WhatsApp</a>
+          <a href="https://wa.me/919545240632" target="_blank" class="btn-sm">Enquire</a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    
+    <div class="product-card fade-in">
+      <div class="product-img"><img src="bouquet_2.png" alt="Purple Orchid Bloom Box"/></div>
+      <div class="product-body">
+        <h3>Purple Orchid Bloom Box</h3>
+        <p class="price">Starting at <strong>&#8377;2,499</strong></p>
+        <p class="product-desc">Vibrant purple and white orchids in a signature pink box — bold, beautiful, and completely unforgettable.</p>
+        <div class="product-actions">
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20order%20a%20Purple%20Orchid%20Bloom%20Box." target="_blank" class="btn-wa">&#128172; Order via WhatsApp</a>
           <a href="https://wa.me/919545240632" target="_blank" class="btn-sm">Enquire</a>
         </div>
       </div>
     </div>
     <div class="product-card fade-in">
-      <div class="product-img">🎂</div>
+      <div class="product-img"><img src="bouquet_3.png" alt="Orchid Flower Basket"/></div>
       <div class="product-body">
-        <h3>Cake &amp; Birthday Surprise</h3>
-        <p class="price">Starting at <strong>₹699</strong></p>
-        <p class="product-desc">Custom cakes with balloon setups and decorations — perfect for celebrating from afar with photo confirmation.</p>
+        <h3>Orchid Flower Basket</h3>
+        <p class="price">Starting at <strong>&#8377;799</strong></p>
+        <p class="product-desc">Fresh white orchids in a rustic jute basket — warm, natural, and full of heartfelt love.</p>
         <div class="product-actions">
-          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20order%20a%20Cake%20Surprise." target="_blank" class="btn-wa">&#128172; Order via WhatsApp</a>
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20order%20an%20Orchid%20Flower%20Basket." target="_blank" class="btn-wa">&#128172; Order via WhatsApp</a>
           <a href="https://wa.me/919545240632" target="_blank" class="btn-sm">Enquire</a>
         </div>
       </div>
     </div>
     <div class="product-card fade-in">
-      <div class="product-img">🎁</div>
+      <div class="product-img"><img src="hamper_1.png" alt="Celebration Gift Hamper"/></div>
       <div class="product-body">
-        <h3>Surprise Combo</h3>
-        <p class="price">Starting at <strong>₹1,499</strong></p>
-        <p class="product-desc">Orchid bouquet + cake + handwritten note — the complete surprise package, beautifully arranged and personally delivered.</p>
+        <h3>Celebration Gift Hamper</h3>
+        <p class="price">Starting at <strong>&#8377;1,199</strong></p>
+        <p class="product-desc">A curated hamper of snacks, chocolates, and treats — thoughtfully packed and wrapped for any occasion.</p>
         <div class="product-actions">
-          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20order%20a%20Surprise%20Combo." target="_blank" class="btn-wa">&#128172; Order via WhatsApp</a>
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20order%20a%20Celebration%20Gift%20Hamper." target="_blank" class="btn-wa">&#128172; Order via WhatsApp</a>
           <a href="https://wa.me/919545240632" target="_blank" class="btn-sm">Enquire</a>
         </div>
       </div>
     </div>
-    <div class="product-card fade-in">
-      <div class="product-img">💬</div>
+<div class="product-card fade-in">
+      <div class="product-img"><img src="hamper_2.png" alt="Custom Surprise Arrangement"/></div>
       <div class="product-body">
-        <h3>Custom Request</h3>
+        <h3>Custom Surprise Arrangement</h3>
         <p class="price" style="color:var(--muted-light)">Price on request</p>
-        <p class="product-desc">Have something unique in mind? Tell us your idea and we'll make it happen — with a personal touch you won't find anywhere else.</p>
+        <p class="product-desc">Something unique in mind? Flowers, food, hampers, or all three — tell us your idea and we'll make it happen personally.</p>
+        <div class="product-actions">
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I%20have%20a%20custom%20request." target="_blank" class="btn-wa">&#128172; Talk to Us</a>
+          <a href="https://wa.me/919545240632" target="_blank" class="btn-sm">Enquire</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card fade-in">
+      <div class="product-img"><img src="fruit_1.png" alt="Fresh Fruit Basket" /></div>
+      <div class="product-body">
+        <h3>The Sovereign Selection</h3>
+        <p class="price">Starting at <strong>&#8377;899</strong></p>
+        <p class="product-desc">A vibrant mix of fresh seasonal fruits in a beautifully decorated basket — healthy, colourful, and full of care.</p>
+        <div class="product-actions">
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20order%20a%20Fresh%20Fruit%20Basket." target="_blank" class="btn-wa">&#128172; Order via WhatsApp</a>
+          <a href="https://wa.me/919545240632" target="_blank" class="btn-sm">Enquire</a>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="product-card fade-in">
+      <div class="product-img"><img src="fruit_2.png" alt="The Heritage Basket"/></div>
+      <div class="product-body">
+        <h3>The Heritage Basket</h3>
+        <p class="price" style="color:var(--muted-light)">Starting at <strong>&#8377;899</strong></p>
+        <p class="product-desc">Something unique in mind? Flowers, food, hampers, or all three — tell us your idea and we'll make it happen personally.</p>
         <div class="product-actions">
           <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I%20have%20a%20custom%20request." target="_blank" class="btn-wa">&#128172; Talk to Us</a>
           <a href="https://wa.me/919545240632" target="_blank" class="btn-sm">Enquire</a>
@@ -395,7 +465,13 @@
       </div>
     </div>
   </div>
+  </div>
+
+  
 </div>
+</div>
+
+
 
 <!-- ═══ ABOUT ═══ -->
 <div class="page" id="page-about">
