@@ -161,6 +161,7 @@
   border-radius: 16px;
 }
 
+
     /* FAQ */
     .faq-hero { background:var(--sage-pale); padding:5rem 6% 3.5rem; text-align:center; }
     .faq-list { padding:4rem 6% 5rem; max-width:780px; margin:0 auto; }
@@ -237,9 +238,10 @@
       .contact-grid { grid-template-columns:1fr; }
       .footer-grid { grid-template-columns:1fr 1fr; gap:2rem; }
     }
+   
     @media(max-width:560px) {
-      .services-grid, .features-grid, .footer-grid { grid-template-columns:1fr; }
-    }
+  .services-grid, .features-grid, .footer-grid, .expect-grid { grid-template-columns:1fr !important; }
+}
   </style>
 </head>
 <body>
@@ -663,8 +665,8 @@ Enquire
     </div>
   </div>
   <!-- What You Can Expect + Who We Serve -->
-<div style="padding:2rem 6% 5rem; background:var(--white); display:grid; grid-template-columns:1fr 1fr; gap:4rem;">
-      <div class="fade-in">
+<div style="padding:2rem 6% 5rem; background:var(--white); display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+        <div class="fade-in">
       <span class="section-label">What You Can Expect</span>
       <h2 class="section-heading" style="font-size:2rem; margin-bottom:1.2rem;">Thoughtful, Reliable, Personal</h2>
       <ul style="list-style:disc; padding-left:1.2rem; color:var(--muted); font-weight:300; font-size:0.95rem; line-height:2;">
