@@ -164,11 +164,18 @@
     .shop-info-card { background:rgba(253,252,250,0.8); border:1px solid var(--border); border-radius:var(--radius-sm); padding:1rem; text-align:left; }
     .shop-info-card strong { display:block; font-size:0.9rem; margin-bottom:0.2rem; }
     .shop-info-card span { font-size:0.82rem; color:var(--muted); }
-    .shop-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; padding:3rem 6% 5rem; background:var(--white); }
-    .product-card { background:var(--cream); border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); transition:box-shadow 0.25s,transform 0.25s; }
+    .shop-filters { display:flex; justify-content:center; flex-wrap:wrap; gap:0.75rem; padding:2.5rem 6% 0; background:var(--white); }
+    .filter-tag { display:inline-flex; align-items:center; justify-content:center; min-height:42px; padding:0.62rem 1.25rem; border-radius:50px; border:1.5px solid var(--border); background:transparent; color:var(--muted); font-family:'DM Sans',sans-serif; font-size:0.86rem; font-weight:500; cursor:pointer; transition:background 0.2s,border-color 0.2s,color 0.2s,transform 0.15s; }
+    .filter-tag:hover { border-color:var(--sage-btn); background:var(--sage-pale); color:var(--charcoal); transform:translateY(-1px); }
+    .filter-tag.active { background:var(--sage-btn); border-color:var(--sage-btn); color:#fff; }
+    .shop-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; padding:2rem 6% 5rem; background:var(--white); }
+    .product-card { background:var(--cream); border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); transition:opacity 0.3s ease,box-shadow 0.25s,transform 0.3s ease; }
+    .product-card.is-filtering-out { opacity:0 !important; transform:translateY(12px) !important; pointer-events:none; }
+    .product-card.is-hidden { display:none; }
     .product-card:hover { box-shadow:var(--shadow-md); transform:translateY(-4px); }
     .product-img { background:linear-gradient(145deg,var(--sage-pale),var(--sage-light)); display:flex; align-items:center; justify-content:center; font-size:3.5rem; overflow:hidden; }
     .product-img img { width:100%; height:auto; display:block; transition:transform 0.4s ease; }
+    .product-placeholder { width:100%; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; padding:2rem; color:var(--muted); font-family:'Playfair Display',serif; font-size:clamp(1.6rem,3vw,2.35rem); font-weight:600; text-align:center; background:radial-gradient(circle at top left,rgba(253,252,250,0.85),transparent 44%),linear-gradient(145deg,var(--sage-pale),var(--sage-light)); }
     .product-card:hover .product-img img { transform:scale(1.03); }
     .product-body { padding:1.5rem; }
     .product-body h3 { font-size:1.1rem; font-weight:600; margin-bottom:0.4rem; }
@@ -445,8 +452,16 @@
       <span>UPI, bank transfer, and options for customers ordering from abroad.</span>
     </div>
   </div>
+  <div class="shop-filters fade-in" aria-label="Filter products by category">
+    <button class="filter-tag active" type="button" data-filter="all" aria-pressed="true" onclick="filterShop('all')">All</button>
+    <button class="filter-tag" type="button" data-filter="flowers" aria-pressed="false" onclick="filterShop('flowers')">Flowers</button>
+    <button class="filter-tag" type="button" data-filter="cakes" aria-pressed="false" onclick="filterShop('cakes')">Cakes</button>
+    <button class="filter-tag" type="button" data-filter="food" aria-pressed="false" onclick="filterShop('food')">Food</button>
+    <button class="filter-tag" type="button" data-filter="sweets" aria-pressed="false" onclick="filterShop('sweets')">Sweets</button>
+    <button class="filter-tag" type="button" data-filter="hampers" aria-pressed="false" onclick="filterShop('hampers')">Hampers</button>
+  </div>
   <div class="shop-grid">
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="bouquet1_1.png" alt="Orchid Box Bouquet"/></div>
       <div class="product-body">
         <h3>The Ethereal Sovereign</h3>
@@ -471,7 +486,7 @@
         </div>
       </div>
     </div>
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="bouquet_4.png" alt="The Ivory Blossom Box"/></div>
       <div class="product-body">
         <h3>The Ivory Blossom Box</h3>
@@ -490,7 +505,7 @@ Enquire
       </div>
     </div>
 
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="bouquet_stand1.png" alt="The Blush Elegance Bouquet"/></div>
       <div class="product-body">
         <h3>The Blush Elegance Bouquet</h3>
@@ -513,7 +528,7 @@ Enquire
 
 
 
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="bouquet_stand2.png" alt="Blush Orchid Symphony"/></div>
       <div class="product-body">
         <h3>Blush Orchid Symphony</h3>
@@ -536,7 +551,7 @@ Enquire
 
 
     
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="bouquet_2.png" alt="The Royal Orchid Bloom "/></div>
       <div class="product-body">
         <h3>The Royal Orchid Bloom </h3>
@@ -555,7 +570,7 @@ Enquire
       </div>
     </div>
 
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="bouquet_3.png" alt="The Rustic Orchid Basket"/></div>
       <div class="product-body">
         <h3>The Rustic Orchid Basket</h3>
@@ -574,7 +589,7 @@ Enquire
       </div>
     </div>
 
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="bouquet_5.png" alt="The Imperial Blossom"/></div>
       <div class="product-body">
         <h3>The Imperial Blossom</h3>
@@ -593,7 +608,7 @@ Enquire
       </div>
     </div>
 
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="bouquet_6.png" alt="The Golden Orchid Keepsake"/></div>
       <div class="product-body">
         <h3>The Golden Orchid Keepsake</h3>
@@ -612,7 +627,7 @@ Enquire
       </div>
     </div>
 
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="hampers">
       <div class="product-img"><img src="hamper_1.png" alt="The Indulgence Hamper"/></div>
       <div class="product-body">
         <h3>The Indulgence Hamper</h3>
@@ -630,7 +645,7 @@ Fully customizable to suit your preferences, making it ideal for personalized gi
         </div>
       </div>
     </div>
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="hampers">
       <div class="product-img"><img src="hamper_2.png" alt="The Festive Delight Hamper"/></div>
       <div class="product-body">
         <h3>The Festive Delight Hamper</h3>
@@ -650,7 +665,52 @@ Enquire
       </div>
     </div>
 
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="cakes">
+      <div class="product-img"><div class="product-placeholder">Celebration Cake</div></div>
+      <div class="product-body">
+        <h3>Celebration Cake</h3>
+        <p class="price">Price on request</p>
+        <p class="product-desc">A fresh, occasion-ready cake placeholder for birthdays, anniversaries, and surprise celebrations.
+
+Flavour, size, message, and decoration can be customized based on availability.</p>
+        <div class="product-actions">
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'm%20interested%20in%20ordering%20a%20Celebration%20Cake.%20Please%20share%20available%20flavours%20and%20sizes." target="_blank" rel="noopener noreferrer" class="btn-wa">&#128172; Order via WhatsApp</a>
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20Can%20you%20help%20me%20customize%20a%20cake%20for%20a%20special%20occasion%3F" target="_blank" rel="noopener noreferrer" class="btn-sm">Enquire</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card fade-in" data-category="food">
+      <div class="product-img"><div class="product-placeholder">Biryani / Food</div></div>
+      <div class="product-body">
+        <h3>Biryani / Food</h3>
+        <p class="price">Price on request</p>
+        <p class="product-desc">A savoury food-order placeholder for comforting meals, biryani trays, and family-style treats.
+
+Menu options and portions can be coordinated based on timing, occasion, and availability.</p>
+        <div class="product-actions">
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'm%20interested%20in%20ordering%20Biryani%20or%20food.%20Please%20share%20available%20options." target="_blank" rel="noopener noreferrer" class="btn-wa">&#128172; Order via WhatsApp</a>
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20Can%20you%20help%20me%20plan%20a%20food%20delivery%20for%20a%20special%20occasion%3F" target="_blank" rel="noopener noreferrer" class="btn-sm">Enquire</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card fade-in" data-category="sweets">
+      <div class="product-img"><div class="product-placeholder">Sweets Box</div></div>
+      <div class="product-body">
+        <h3>Traditional Sweets Box</h3>
+        <p class="price">Price on request</p>
+        <p class="product-desc">A festive sweets placeholder for mithai boxes, celebration assortments, and family gifting.
+
+Selections can be tailored for festivals, birthdays, thank-you gifts, or simple sweet surprises.</p>
+        <div class="product-actions">
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'm%20interested%20in%20ordering%20a%20Traditional%20Sweets%20Box.%20Please%20share%20available%20options." target="_blank" rel="noopener noreferrer" class="btn-wa">&#128172; Order via WhatsApp</a>
+          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20Can%20you%20help%20me%20customize%20a%20sweets%20box%3F" target="_blank" rel="noopener noreferrer" class="btn-sm">Enquire</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card fade-in" data-category="hampers">
       <div class="product-img"><img src="fruit_1.png" alt="The Fresh Harvest Basket"/></div>
       <div class="product-body">
         <h3>The Fresh Harvest Basket</h3>
@@ -671,7 +731,7 @@ Enquire
 
   
 
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="hampers">
       <div class="product-img"><img src="fruit_3.png" alt="The Fresh Harvest Mini"/></div>
       <div class="product-body">
         <h3>The Fresh Harvest Mini</h3>
@@ -690,7 +750,7 @@ Enquire
       </div>
     </div>
 
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="flower_1.png" alt="The Ivory Orchid Stems"/></div>
       <div class="product-body">
         <h3>The Ivory Orchid Stems</h3>
@@ -709,7 +769,7 @@ Enquire
       </div>
     </div>
 
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="flower_2.png" alt="The Amethyst Orchid Stems" /></div>
       <div class="product-body">
         <h3>The Amethyst Orchid Stems</h3>
@@ -732,7 +792,7 @@ Enquire
 
     
 
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="plant_1.png" alt="The Blooming Orchid Plant"/></div>
       <div class="product-body">
         <h3>The Blooming Orchid Plant</h3>
@@ -1105,6 +1165,37 @@ Cancellations are free before order processing begins. Once items have been purc
     const item = el.closest('.faq-item');
     const isOpen = item.classList.toggle('open');
     el.setAttribute('aria-expanded', String(isOpen));
+  }
+  function filterShop(category) {
+    const selected = category || 'all';
+    const buttons = document.querySelectorAll('.filter-tag');
+    const cards = document.querySelectorAll('#page-shop .product-card');
+
+    buttons.forEach((button) => {
+      const isActive = button.dataset.filter === selected;
+      button.classList.toggle('active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
+    });
+
+    cards.forEach((card) => {
+      const shouldShow = selected === 'all' || card.dataset.category === selected;
+
+      if (shouldShow) {
+        card.classList.remove('is-hidden');
+        card.classList.add('is-filtering-out');
+        window.requestAnimationFrame(() => {
+          card.classList.remove('is-filtering-out');
+          card.classList.add('visible');
+        });
+      } else {
+        card.classList.add('is-filtering-out');
+        window.setTimeout(() => {
+          if (card.classList.contains('is-filtering-out')) {
+            card.classList.add('is-hidden');
+          }
+        }, 300);
+      }
+    });
   }
   function observeFadeIns() {
     const els = document.querySelectorAll('.page.active .fade-in');
