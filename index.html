@@ -74,7 +74,7 @@
       display: flex; align-items: center; justify-content: space-between;
     }
     .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--charcoal); cursor: pointer; background:none; border:none; padding:0; }
-    .nav-logo span { color: var(--muted); font-weight: 400; font-style: italic; }
+    .nav-logo span { color: var(--sage-btn); font-weight: 400; font-style: italic; }
     .nav-links { display:flex; align-items:center; gap:2rem; list-style:none; }
     .nav-links a { font-size: 0.87rem; font-weight: 500; color: var(--charcoal); opacity: 0.65; transition: opacity 0.2s; cursor: pointer; }
     .nav-links a:hover, .nav-links a.active { opacity: 1; }
@@ -169,13 +169,26 @@
     .filter-tag:hover { border-color:var(--sage-btn); background:var(--sage-pale); color:var(--charcoal); transform:translateY(-1px); }
     .filter-tag.active { background:var(--sage-btn); border-color:var(--sage-btn); color:#fff; }
     .shop-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; padding:2rem 6% 5rem; background:var(--white); }
+    .shop-grid.is-hidden { display:none; }
+    .custom-order-section { display:none; padding:2rem 6% 5rem; background:var(--white); }
+    .custom-order-section.active { display:block; }
+    .custom-order-card { max-width:860px; margin:0 auto; background:var(--cream); border:1px solid var(--border); border-radius:var(--radius); padding:2rem; }
+    .custom-order-card h2 { font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:0.45rem; }
+    .custom-order-sub { color:var(--muted); font-weight:300; margin-bottom:1.8rem; }
+    .custom-order-group { margin-bottom:1.35rem; }
+    .custom-order-label { display:block; color:var(--charcoal); font-size:0.95rem; font-weight:600; margin-bottom:0.7rem; }
+    .custom-order-options { display:flex; flex-wrap:wrap; gap:0.65rem; }
+    .custom-order-pill { display:inline-flex; align-items:center; justify-content:center; min-height:40px; padding:0.56rem 1rem; border:1.5px solid var(--border); border-radius:50px; background:var(--white); color:var(--muted); font-family:'DM Sans',sans-serif; font-size:0.86rem; font-weight:500; cursor:pointer; transition:background 0.2s,border-color 0.2s,color 0.2s,transform 0.15s; }
+    .custom-order-pill:hover { border-color:var(--sage-btn); background:var(--sage-pale); color:var(--charcoal); transform:translateY(-1px); }
+    .custom-order-pill.active { background:var(--sage-btn); border-color:var(--sage-btn); color:#fff; }
+    .custom-order-details { width:100%; min-height:130px; resize:vertical; font-family:'DM Sans',sans-serif; font-size:0.95rem; background:var(--white); border:1.5px solid var(--border); border-radius:var(--radius-sm); padding:0.9rem 1rem; color:var(--charcoal); outline:none; transition:border-color 0.2s; }
+    .custom-order-details:focus { border-color:var(--sage-btn); }
     .product-card { background:var(--cream); border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); transition:opacity 0.3s ease,box-shadow 0.25s,transform 0.3s ease; }
     .product-card.is-filtering-out { opacity:0 !important; transform:translateY(12px) !important; pointer-events:none; }
     .product-card.is-hidden { display:none; }
     .product-card:hover { box-shadow:var(--shadow-md); transform:translateY(-4px); }
     .product-img { background:linear-gradient(145deg,var(--sage-pale),var(--sage-light)); display:flex; align-items:center; justify-content:center; font-size:3.5rem; overflow:hidden; }
     .product-img img { width:100%; height:auto; display:block; transition:transform 0.4s ease; }
-    .product-placeholder { width:100%; aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; padding:2rem; color:var(--muted); font-family:'Playfair Display',serif; font-size:clamp(1.6rem,3vw,2.35rem); font-weight:600; text-align:center; background:radial-gradient(circle at top left,rgba(253,252,250,0.85),transparent 44%),linear-gradient(145deg,var(--sage-pale),var(--sage-light)); }
     .product-card:hover .product-img img { transform:scale(1.03); }
     .product-body { padding:1.5rem; }
     .product-body h3 { font-size:1.1rem; font-weight:600; margin-bottom:0.4rem; }
@@ -455,11 +468,51 @@
   <div class="shop-filters fade-in" aria-label="Filter products by category">
     <button class="filter-tag active" type="button" data-filter="all" aria-pressed="true" onclick="filterShop('all')">All</button>
     <button class="filter-tag" type="button" data-filter="flowers" aria-pressed="false" onclick="filterShop('flowers')">Flowers</button>
-    <button class="filter-tag" type="button" data-filter="cakes" aria-pressed="false" onclick="filterShop('cakes')">Cakes</button>
-    <button class="filter-tag" type="button" data-filter="food" aria-pressed="false" onclick="filterShop('food')">Food</button>
-    <button class="filter-tag" type="button" data-filter="sweets" aria-pressed="false" onclick="filterShop('sweets')">Sweets</button>
     <button class="filter-tag" type="button" data-filter="hampers" aria-pressed="false" onclick="filterShop('hampers')">Hampers</button>
+    <button class="filter-tag" type="button" data-filter="custom" aria-pressed="false" onclick="filterShop('custom')">Custom Order</button>
   </div>
+  <section class="custom-order-section fade-in" id="custom-order-section" aria-label="Custom order request">
+    <div class="custom-order-card">
+      <h2>Build Your Custom Order</h2>
+      <p class="custom-order-sub">Tell us what you have in mind and we'll make it happen.</p>
+
+      <div class="custom-order-group" data-custom-group="category">
+        <span class="custom-order-label">What would you like?</span>
+        <div class="custom-order-options">
+          <button class="custom-order-pill" type="button" data-value="Food" aria-pressed="false" onclick="selectCustomOption(this)">Food</button>
+          <button class="custom-order-pill" type="button" data-value="Cakes" aria-pressed="false" onclick="selectCustomOption(this)">Cakes</button>
+          <button class="custom-order-pill" type="button" data-value="Sweets" aria-pressed="false" onclick="selectCustomOption(this)">Sweets</button>
+          <button class="custom-order-pill" type="button" data-value="Other" aria-pressed="false" onclick="selectCustomOption(this)">Other</button>
+        </div>
+      </div>
+
+      <div class="custom-order-group" data-custom-group="occasion">
+        <span class="custom-order-label">What's the occasion?</span>
+        <div class="custom-order-options">
+          <button class="custom-order-pill" type="button" data-value="Birthday" aria-pressed="false" onclick="selectCustomOption(this)">Birthday</button>
+          <button class="custom-order-pill" type="button" data-value="Anniversary" aria-pressed="false" onclick="selectCustomOption(this)">Anniversary</button>
+          <button class="custom-order-pill" type="button" data-value="Festival" aria-pressed="false" onclick="selectCustomOption(this)">Festival</button>
+          <button class="custom-order-pill" type="button" data-value="Just Because" aria-pressed="false" onclick="selectCustomOption(this)">Just Because</button>
+        </div>
+      </div>
+
+      <div class="custom-order-group" data-custom-group="budget">
+        <span class="custom-order-label">Your budget</span>
+        <div class="custom-order-options">
+          <button class="custom-order-pill" type="button" data-value="Under &#8377;500" aria-pressed="false" onclick="selectCustomOption(this)">Under &#8377;500</button>
+          <button class="custom-order-pill" type="button" data-value="&#8377;500–&#8377;1000" aria-pressed="false" onclick="selectCustomOption(this)">&#8377;500–&#8377;1000</button>
+          <button class="custom-order-pill" type="button" data-value="&#8377;1000–&#8377;2000" aria-pressed="false" onclick="selectCustomOption(this)">&#8377;1000–&#8377;2000</button>
+          <button class="custom-order-pill" type="button" data-value="&#8377;2000+" aria-pressed="false" onclick="selectCustomOption(this)">&#8377;2000+</button>
+        </div>
+      </div>
+
+      <div class="custom-order-group">
+        <textarea class="custom-order-details" id="custom-order-details" placeholder="Any specific details? (restaurant name, dish, flavour, sweet shop, etc.)"></textarea>
+      </div>
+
+      <button class="btn-primary" type="button" onclick="sendCustomOrder()">Send Custom Request on WhatsApp</button>
+    </div>
+  </section>
   <div class="shop-grid">
     <div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="bouquet1_1.png" alt="Orchid Box Bouquet"/></div>
@@ -665,51 +718,6 @@ Enquire
       </div>
     </div>
 
-    <div class="product-card fade-in" data-category="cakes">
-      <div class="product-img"><div class="product-placeholder">Celebration Cake</div></div>
-      <div class="product-body">
-        <h3>Celebration Cake</h3>
-        <p class="price">Price on request</p>
-        <p class="product-desc">A fresh, occasion-ready cake placeholder for birthdays, anniversaries, and surprise celebrations.
-
-Flavour, size, message, and decoration can be customized based on availability.</p>
-        <div class="product-actions">
-          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'm%20interested%20in%20ordering%20a%20Celebration%20Cake.%20Please%20share%20available%20flavours%20and%20sizes." target="_blank" rel="noopener noreferrer" class="btn-wa">&#128172; Order via WhatsApp</a>
-          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20Can%20you%20help%20me%20customize%20a%20cake%20for%20a%20special%20occasion%3F" target="_blank" rel="noopener noreferrer" class="btn-sm">Enquire</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card fade-in" data-category="food">
-      <div class="product-img"><div class="product-placeholder">Biryani / Food</div></div>
-      <div class="product-body">
-        <h3>Biryani / Food</h3>
-        <p class="price">Price on request</p>
-        <p class="product-desc">A savoury food-order placeholder for comforting meals, biryani trays, and family-style treats.
-
-Menu options and portions can be coordinated based on timing, occasion, and availability.</p>
-        <div class="product-actions">
-          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'm%20interested%20in%20ordering%20Biryani%20or%20food.%20Please%20share%20available%20options." target="_blank" rel="noopener noreferrer" class="btn-wa">&#128172; Order via WhatsApp</a>
-          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20Can%20you%20help%20me%20plan%20a%20food%20delivery%20for%20a%20special%20occasion%3F" target="_blank" rel="noopener noreferrer" class="btn-sm">Enquire</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card fade-in" data-category="sweets">
-      <div class="product-img"><div class="product-placeholder">Sweets Box</div></div>
-      <div class="product-body">
-        <h3>Traditional Sweets Box</h3>
-        <p class="price">Price on request</p>
-        <p class="product-desc">A festive sweets placeholder for mithai boxes, celebration assortments, and family gifting.
-
-Selections can be tailored for festivals, birthdays, thank-you gifts, or simple sweet surprises.</p>
-        <div class="product-actions">
-          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'm%20interested%20in%20ordering%20a%20Traditional%20Sweets%20Box.%20Please%20share%20available%20options." target="_blank" rel="noopener noreferrer" class="btn-wa">&#128172; Order via WhatsApp</a>
-          <a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20Can%20you%20help%20me%20customize%20a%20sweets%20box%3F" target="_blank" rel="noopener noreferrer" class="btn-sm">Enquire</a>
-        </div>
-      </div>
-    </div>
-
     <div class="product-card fade-in" data-category="hampers">
       <div class="product-img"><img src="fruit_1.png" alt="The Fresh Harvest Basket"/></div>
       <div class="product-body">
@@ -888,8 +896,8 @@ Enquire
   </div>
   <div class="faq-list">
     <div class="faq-item"><button class="faq-q" type="button" onclick="toggleFaq(this)"><span class="faq-title">How do I place an order?</span><span class="faq-icon">+</span></button><div class="faq-a"><p>You can place an order by messaging us on WhatsApp or through our contact form. Simply share your requirements, preferred date, and delivery details. We’ll confirm availability and guide you through the process.</p></div></div>
-    <div class="faq-item"><button class="faq-q" type="button" onclick="toggleFaq(this)"><span class="faq-title">What payment methods do you accept?</span><span class="faq-icon">+</span></button><div class="faq-a"><p>We accept UPI and bank transfers. For customers abroad, international payment methods including PayPal and Wise can be arranged on request.</p></div></div>
-    <div class="faq-item"><button class="faq-q" type="button" onclick="toggleFaq(this)"><span class="faq-title">Do you offer same-day delivery?</span><span class="faq-icon">+</span></button><div class="faq-a"><p>Same-day delivery may be available depending on the product and timing of your request. We recommend placing your order at least 24 hours in advance for guaranteed availability.</p></div></div>
+    <div class="faq-item"><button class="faq-q" type="button" onclick="toggleFaq(this)"><span class="faq-title">What payment methods do you accept?</span><span class="faq-icon">+</span></button><div class="faq-a"><p>We accept UPI and bank transfers. For customers abroad, international payment methods including Razorpay can be arranged on request.</p></div></div>
+    <div class="faq-item"><button class="faq-q" type="button" onclick="toggleFaq(this)"><span class="faq-title">Do you offer same-day delivery?</span><span class="faq-icon">+</span></button><div class="faq-a"><p>Same-day delivery may be available depending on the product and timing of your request. We recommend placing your order at least 48 hours in advance for guaranteed availability.</p></div></div>
     <div class="faq-item"><button class="faq-q" type="button" onclick="toggleFaq(this)"><span class="faq-title">Can I customize my order?</span><span class="faq-icon">+</span></button><div class="faq-a"><p>Yes, absolutely. Whether it's a specific bouquet style, a custom gift combination, or a special request, we’ll do our best to bring your idea to life.</p></div></div>
     <div class="faq-item"><button class="faq-q" type="button" onclick="toggleFaq(this)"><span class="faq-title">What areas do you currently serve?</span><span class="faq-icon">+</span></button><div class="faq-a"><p>We currently serve Vasai West and nearby areas. If you're unsure whether we can deliver to a specific location, feel free to reach out.</p></div></div>
     <div class="faq-item"><button class="faq-q" type="button" onclick="toggleFaq(this)"><span class="faq-title">How will I know the delivery was completed?</span><span class="faq-icon">+</span></button><div class="faq-a"><p>We confirm once your order has been successfully delivered, so you can be assured it has reached your loved ones.</p></div></div>
@@ -1168,7 +1176,9 @@ Cancellations are free before order processing begins. Once items have been purc
   }
   function filterShop(category) {
     const selected = category || 'all';
-    const buttons = document.querySelectorAll('.filter-tag');
+    const buttons = document.querySelectorAll('#page-shop .filter-tag');
+    const grid = document.querySelector('#page-shop .shop-grid');
+    const customSection = document.getElementById('custom-order-section');
     const cards = document.querySelectorAll('#page-shop .product-card');
 
     buttons.forEach((button) => {
@@ -1176,6 +1186,17 @@ Cancellations are free before order processing begins. Once items have been purc
       button.classList.toggle('active', isActive);
       button.setAttribute('aria-pressed', String(isActive));
     });
+
+    if (selected === 'custom') {
+      if (grid) grid.classList.add('is-hidden');
+      if (customSection) {
+        customSection.classList.add('active', 'visible');
+      }
+      return;
+    }
+
+    if (grid) grid.classList.remove('is-hidden');
+    if (customSection) customSection.classList.remove('active');
 
     cards.forEach((card) => {
       const shouldShow = selected === 'all' || card.dataset.category === selected;
@@ -1196,6 +1217,28 @@ Cancellations are free before order processing begins. Once items have been purc
         }, 300);
       }
     });
+  }
+  function selectCustomOption(button) {
+    const group = button.closest('.custom-order-group');
+    if (!group) return;
+
+    group.querySelectorAll('.custom-order-pill').forEach((pill) => {
+      const isSelected = pill === button;
+      pill.classList.toggle('active', isSelected);
+      pill.setAttribute('aria-pressed', String(isSelected));
+    });
+  }
+  function getCustomOrderValue(groupName) {
+    const selected = document.querySelector(`[data-custom-group="${groupName}"] .custom-order-pill.active`);
+    return selected ? selected.dataset.value : 'Not selected';
+  }
+  function sendCustomOrder() {
+    const category = getCustomOrderValue('category');
+    const occasion = getCustomOrderValue('occasion');
+    const budget = getCustomOrderValue('budget');
+    const details = document.getElementById('custom-order-details')?.value.trim() || 'Not provided';
+    const message = `Hi Across Miles! I'd like to place a custom order. Category: ${category} | Occasion: ${occasion} | Budget: ${budget} | Details: ${details}`;
+    window.open(`https://wa.me/919545240632?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
   }
   function observeFadeIns() {
     const els = document.querySelectorAll('.page.active .fade-in');
