@@ -109,6 +109,7 @@
     .hero p { font-size:1.05rem; color:var(--muted); max-width:440px; font-weight:300; margin-bottom:2.4rem; }
     .hero-img-wrap { position:relative; border-radius:var(--radius); overflow:hidden; background:var(--sage-pale); aspect-ratio:4/5; box-shadow:var(--shadow-md); }
     .hero-img-placeholder { width:100%; height:100%; background:linear-gradient(145deg,var(--sage-pale) 0%,var(--sage-light) 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; color:var(--muted); font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; }
+    .hero-img-placeholder img { width:100%; height:100%; object-fit:cover; object-position:center bottom; border-radius:var(--radius); display:block; }
     .hero-badge { position:absolute; bottom:1.5rem; left:1.5rem; background:rgba(253,252,250,0.92); backdrop-filter:blur(8px); padding:0.8rem 1.2rem; border-radius:var(--radius-sm); box-shadow:var(--shadow); }
     .hero-badge strong { display:block; font-size:1.1rem; color:var(--charcoal); }
     .hero-badge span { font-size:0.78rem; color:var(--muted); }
@@ -296,7 +297,7 @@
       .nav-links { display:none; }
       .hamburger { display:flex; }
       .hero { grid-template-columns:1fr; padding:3rem 6%; min-height:auto; }
-      .hero-img-wrap { max-width:400px; margin:0 auto; aspect-ratio:4/3; }
+      .hero-img-wrap { width:100%; max-width:400px; margin:0 auto; aspect-ratio:4/5; }
       .trust-strip { grid-template-columns:1fr; }
       .shop-info-strip { grid-template-columns:repeat(2,1fr); }
       .services-grid { grid-template-columns:repeat(2,1fr); }
@@ -362,7 +363,7 @@
     </div>
     <div class="hero-img-wrap fade-in">
       <div class="hero-img-placeholder">
-        <img src="bouquet1_1.png" alt="Purple Orchid Bouquet" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius);"/>
+        <img src="bouquet1_1.png" alt="Purple Orchid Bouquet"/>
       </div>
       <div class="hero-badge">
         <strong>🌿 Vasai West</strong>
