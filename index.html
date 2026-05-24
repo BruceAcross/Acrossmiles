@@ -282,12 +282,13 @@
     .footer-col ul { list-style:none; display:flex; flex-direction:column; gap:0.6rem; }
     .footer-col ul a { font-size:0.8f8rem; color:var(--charcoal); opacity:0.65; transition:opacity 0.2s; cursor:pointer; }
     .footer-col ul a:hover { opacity:1; }
+    .footer-social-link { display:inline-flex; align-items:center; gap:0.45rem; }
+    .footer-social-link svg { width:16px; height:16px; flex-shrink:0; stroke:var(--sage-btn); }
     .footer-newsletter { display:flex; gap:0.5rem; margin-top:0.5rem; width:100%; }
     .footer-newsletter input { font-family:'DM Sans',sans-serif; flex:1; min-width:0; padding:0.7rem 1rem; border:1.5px solid var(--border); border-radius:50px; background:var(--white); font-size:0.85rem; outline:none; transition:border-color 0.2s,box-shadow 0.2s; }
     .footer-newsletter input:focus { border-color:var(--sage-btn); box-shadow:0 0 0 4px rgba(127,166,127,0.12); }
     .footer-newsletter button { background:var(--sage-btn); color:#fff; border:none; border-radius:50px; padding:0.7rem 1.1rem; font-size:0.82rem; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background 0.2s,transform 0.15s; white-space:nowrap; }
     .footer-newsletter button:hover { background:var(--muted); transform:translateY(-1px); }
-    .footer-note { display:block; font-size:0.8rem; color:var(--muted); margin-top:0.7rem; }
     .footer-success { display:none; margin-top:0.8rem; padding:0.75rem 0.95rem; border-radius:14px; background:rgba(127,166,127,0.12); color:var(--charcoal); font-size:0.82rem; line-height:1.5; border:1px solid rgba(127,166,127,0.2); }
     .footer-success.show { display:block; }
     .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
@@ -367,8 +368,9 @@
     <div class="fade-in">
       <span class="section-label">From Miles Away, With Love</span>
       <h1>Bringing Families Closer, <em>Across Miles.</em></h1>
-      <p>We help you send thoughtful surprises — from elegant orchid bouquets to curated gifts — for every meaningful moment.
-      Whether you're nearby or miles away, we make it effortless to show you care.
+      <p>Whether you're across the world or just around 
+the corner — we help you send love, care, and 
+thoughtful surprises to the people who matter most.
       </p>
       <div class="btn-group">
         <button class="btn-primary" onclick="showPage('shop')">Explore Collection</button>
@@ -477,12 +479,12 @@
     </div>
     <div class="shop-info-card fade-in">
       <strong>Payments</strong>
-      <span>UPI, bank transfer, and options for customers ordering from abroad.</span>
+      <span>Secure and convenient payment options for customers ordering from anywhere in the world.</span>
     </div>
   </div>
   <div class="shop-filters fade-in" aria-label="Filter products by category">
     <button class="filter-tag active" type="button" data-filter="all" aria-pressed="true" onclick="filterShop('all')">All</button>
-    <button class="filter-tag" type="button" data-filter="flowers" aria-pressed="false" onclick="filterShop('flowers')">Flowers</button>
+    <button class="filter-tag" type="button" data-filter="flowers" aria-pressed="false" onclick="filterShop('flowers')">Bouquets</button>
     <button class="filter-tag" type="button" data-filter="hampers" aria-pressed="false" onclick="filterShop('hampers')">Hampers</button>
     <button class="filter-tag" type="button" data-filter="custom" aria-pressed="false" onclick="filterShop('custom')">Custom Order</button>
   </div>
@@ -522,7 +524,7 @@
       </div>
 
       <div class="custom-order-group">
-        <textarea class="custom-order-details" id="custom-order-details" placeholder="Any specific details? (restaurant name, dish, flavour, sweet shop, etc.)"></textarea>
+        <textarea class="custom-order-details" id="custom-order-details" placeholder="Any specific details? (restaurant name, dish, sweet shop, etc.)"></textarea>
       </div>
 
       <button class="btn-primary" type="button" onclick="sendCustomOrder()">Send Custom Request on WhatsApp</button>
@@ -574,20 +576,42 @@ Enquire
     </div>
 
 <div class="product-card fade-in" data-category="flowers">
-      <div class="product-img"><img src="bouquet_stand1.png" alt="The Blush Elegance Bouquet"/></div>
+      <div class="product-img"><img src="Tropical_elegance_box.png" alt="The Tropical Elegance Box"/></div>
       <div class="product-body">
-        <h3>The Blush Elegance Bouquet</h3>
-        <p class="price">Starting at <strong>&#8377;800</strong></p>
+        <h3>The Tropical Elegance Box</h3>
+        <p class="price">Starting at <strong>&#8377;1,200</strong></p>
         <p class="product-desc">
-A delicate arrangement of fresh white orchids wrapped in soft blush tones, designed to reflect grace, warmth, and quiet elegance.
+A luxurious tropical arrangement featuring vibrant purple orchids, exotic birds of paradise, and delicate white blooms â€” thoughtfully styled to create an elegant and unforgettable gifting experience.
 
-Perfect for heartfelt gestures, intimate celebrations, or simply letting someone know they’re on your mind.
+Bold, refined, and perfect for celebrating meaningful moments.
 </p>
         <div class="product-actions">
-<a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20place%20an%20order%20for%20the%20Blush%20Elegance%20Bouquet.%20Please%20share%20the%20details." target="_blank" class="btn-wa">
+<a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20place%20an%20order%20for%20The%20Tropical%20Elegance%20Box.%20Please%20share%20the%20details." target="_blank" rel="noopener noreferrer" class="btn-wa">
 &#128172; Order via WhatsApp
 </a>
-<a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'm%20interested%20in%20the%20Blush%20Elegance%20Bouquet.%20Can%20this%20be%20customized%3F" target="_blank" class="btn-sm">
+
+<a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'm%20interested%20in%20The%20Tropical%20Elegance%20Box.%20Can%20this%20be%20customized%3F" target="_blank" rel="noopener noreferrer" class="btn-sm">
+Enquire
+</a>
+        </div>
+      </div>
+    </div>
+
+<div class="product-card fade-in" data-category="flowers">
+      <div class="product-img"><img src="bouquet_stand1.png" alt="The Blush Elegance Bouquet"/></div>
+      <div class="product-body">
+        <h3>Moonlight Orchids</h3>
+        <p class="price">Starting at <strong>&#8377;800</strong></p>
+        <p class="product-desc">
+A graceful arrangement of pristine white orchids wrapped in soft blush tones — thoughtfully designed to feel elegant, delicate, and timeless.
+
+Soft, refined, and perfect for heartfelt moments and meaningful gifting.
+</p>
+        <div class="product-actions">
+<a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20place%20an%20order%20for%20The%20Moonlight%20Orchid%20Bouquet.%20Please%20share%20the%20details." target="_blank" class="btn-wa">
+&#128172; Order via WhatsApp
+</a>
+<a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'm%20interested%20in%20The%20Moonlight%20Orchid%20Bouquet.%20Can%20this%20be%20customized%3F" target="_blank" class="btn-sm">
 Enquire
 </a>
         </div>
@@ -599,18 +623,18 @@ Enquire
     <div class="product-card fade-in" data-category="flowers">
       <div class="product-img"><img src="bouquet_stand2.png" alt="Blush Orchid Symphony"/></div>
       <div class="product-body">
-        <h3>Blush Orchid Symphony</h3>
+        <h3>Velvet Orchids</h3>
         <p class="price">Starting at <strong>&#8377;800</strong></p>
        <p class="product-desc">
-A lush arrangement of vibrant purple orchids wrapped in soft blush tones, designed to feel rich, expressive, and beautifully elegant.
+A luxurious arrangement of vibrant purple orchids wrapped in soft blush tones — designed to feel rich, expressive, and beautifully elegant.
 
-Perfect for celebrations, romantic surprises, and moments that deserve something truly special.
+Bold yet refined, this bouquet is perfect for celebrating unforgettable moments.
 </p>
         <div class="product-actions">
-<a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20place%20an%20order%20for%20the%20Blush%20Orchid%20Symphony.%20Please%20share%20the%20details." target="_blank" class="btn-wa">
+<a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'd%20like%20to%20place%20an%20order%20for%20The%20Velvet%20Orchid%20Bouquet.%20Please%20share%20the%20details." target="_blank" class="btn-wa">
 &#128172; Order via WhatsApp
 </a>
-<a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'm%20interested%20in%20the%20Blush%20Orchid%20Symphony.%20Can%20this%20be%20customized%3F" target="_blank" class="btn-sm">
+<a href="https://wa.me/919545240632?text=Hi%20Across%20Miles!%20I'm%20interested%20in%20The%20Velvet%20Orchid%20Bouquet.%20Can%20this%20be%20customized%3F" target="_blank" class="btn-sm">
 Enquire
 </a>
         </div>
@@ -1011,13 +1035,24 @@ Cancellations are free before order processing begins. Once items have been purc
     </div>
     <div class="footer-col">
       <h5>Stay Connected</h5>
+      <ul>
+        <li>
+          <a class="footer-social-link" href="https://www.instagram.com/acrossmiles_co/" target="_blank" rel="noopener noreferrer" aria-label="Across Miles on Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"></circle>
+            </svg>
+            <span>@acrossmiles_co</span>
+          </a>
+        </li>
+      </ul>
       <p style="font-size:0.85rem;color:var(--muted);font-weight:300;margin-bottom:0.8rem">Get updates on new collections, festive hampers, and thoughtful gifting ideas.</p>
       <form class="footer-newsletter" onsubmit="handleNewsletterSignup(event)">
         <label class="sr-only" for="newsletter-email">Email address</label>
         <input type="email" id="newsletter-email" placeholder="your@email.com" autocomplete="email" required />
         <button type="submit">Join</button>
       </form>
-      <span class="footer-note">We’ll open your email app with a ready-to-send subscription request.</span>
       <div class="footer-success" id="newsletter-success" aria-live="polite"></div>
     </div>
   </div>
