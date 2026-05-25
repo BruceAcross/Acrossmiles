@@ -171,7 +171,7 @@
     .filter-tag.active { background:var(--sage-btn); border-color:var(--sage-btn); color:#fff; }
     .shop-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; padding:2rem 6% 5rem; background:var(--white); }
     .shop-grid.is-hidden { display:none; }
-    .custom-order-section { display:none; padding:2rem 6% 5rem; background:var(--white); }
+    .custom-order-section { display:none; padding:2rem 6% 5rem; background:var(--white); scroll-margin-top:68px; }
     .custom-order-section.active { display:block; }
     .custom-order-card { max-width:860px; margin:0 auto; background:var(--cream); border:1px solid var(--border); border-radius:var(--radius); padding:2rem; }
     .custom-order-card h2 { font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:0.45rem; }
@@ -413,9 +413,9 @@ thoughtful surprises to the people who matter most.
       <div class="service-card fade-in"><div class="service-icon">🌺</div><h4>Orchid Bouquets &amp; Florals</h4><p>Exotic orchid arrangements hand-delivered to brighten their day and remind them of your presence.</p><a href="https://wa.me/919545240632" target="_blank" rel="noopener noreferrer" class="service-link">Enquire Now</a></div>
       <div class="service-card fade-in"><div class="service-icon">🎂</div><h4>Cakes &amp; Birthday Surprises</h4><p>Decadent cakes and festive decorations to ensure their special day is filled with sweetness and joy.</p><a href="https://wa.me/919545240632" target="_blank" rel="noopener noreferrer" class="service-link">Enquire Now</a></div>
       <div class="service-card fade-in"><div class="service-icon">🍎</div><h4>Curated Fruit Baskets</h4><p>Thoughtfully curated fruit baskets, from classic selections to premium assortments — perfect for healthy, meaningful gifting.</p><a href="https://wa.me/919545240632" target="_blank" rel="noopener noreferrer" class="service-link">Enquire Now</a></div>
-      <div class="service-card fade-in"><div class="service-icon">🎁</div><h4>Festival Hampers</h4><p>Curated collections of traditional sweets and gifts for Diwali, Raksha Bandhan, and every celebration.</p><a href="https://wa.me/919545240632" target="_blank" rel="noopener noreferrer" class="service-link">Enquire Now</a></div>
+      <div class="service-card fade-in"><div class="service-icon">🎁</div><h4>Festival Hampers</h4><p>Curated collections of traditional sweets and gifts for Christmas, Diwali and every celebration.</p><a href="https://wa.me/919545240632" target="_blank" rel="noopener noreferrer" class="service-link">Enquire Now</a></div>
       <div class="service-card fade-in"><div class="service-icon">🌿</div><h4>Orchid Plants</h4><p>Elegant, long-lasting orchid plants that bring beauty and freshness into any space — a gift that continues to bloom over time.</p><a href="https://wa.me/919545240632" target="_blank" rel="noopener noreferrer" class="service-link">Enquire Now</a></div>
-      <div class="service-card fade-in"><div class="service-icon">✨</div><h4>Custom Surprise Arrangements</h4><p>Something unique in mind? We'll bring your thoughtful idea to life with a personal touch.</p><a href="https://wa.me/919545240632" target="_blank" rel="noopener noreferrer" class="service-link">Enquire Now</a></div>
+      <div class="service-card fade-in"><div class="service-icon">✨</div><h4>Custom Surprise Arrangements</h4><p>Something unique in mind? We'll bring your thoughtful idea to life with a personal touch.</p><a href="#shop" onclick="openCustomOrder(); return false;" class="service-link">Create Custom Order</a></div>
     </div>
   </section>
 
@@ -1289,6 +1289,11 @@ Cancellations are free before order processing begins. Once items have been purc
         }, 300);
       }
     });
+  }
+  function openCustomOrder() {
+    showPage('shop', { scroll: false });
+    filterShop('custom');
+    document.getElementById('custom-order-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function initProductCarousels() {
     document.querySelectorAll('[data-carousel]').forEach((carousel) => {
