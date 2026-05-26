@@ -356,7 +356,25 @@
 	      .footer-grid { grid-template-columns:1fr 1fr; gap:2rem; }
 	    }
 	   
-	    @media(max-width:560px) {
+    @media(max-width:560px) {
+  .announcement-bar {
+    height:auto;
+    min-height:40px;
+    padding:0.5rem 2.7rem 0.5rem 1rem;
+    line-height:1.35;
+    white-space:normal;
+  }
+  .announcement-close { right:0.55rem; }
+  nav { top:56px; }
+  .mobile-menu { top:124px; }
+  .page { padding-top:124px; }
+  .hero { min-height:calc(100vh - 124px); }
+  .custom-order-section { scroll-margin-top:124px; }
+  body.announcement-dismissed nav { top:0; }
+  body.announcement-dismissed .mobile-menu { top:68px; }
+  body.announcement-dismissed .page { padding-top:68px; }
+  body.announcement-dismissed .hero { min-height:calc(100vh - 68px); }
+  body.announcement-dismissed .custom-order-section { scroll-margin-top:68px; }
   .services-grid, .features-grid, .footer-grid, .expect-grid, .shop-info-strip, .about-expect-grid { grid-template-columns:1fr !important; }
   .carousel-arrow { display:none; }
   .about-expect-grid { padding-top:1.5rem; }
